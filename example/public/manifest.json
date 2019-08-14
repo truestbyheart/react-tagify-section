@@ -1,0 +1,8 @@
+{
+  "short_name": "react-tagify-section",
+  "name": "react-tagify-section",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
