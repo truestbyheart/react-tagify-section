@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'react-tagify-section'
+import Tagify from 'react-tagify-section'
 
-export default class App extends Component {
-  render () {
-    return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
-    )
+class App extends Component {
+  tags = [
+    {
+      name: 'java'
+    },
+    {
+      name: 'javascript'
+    },
+    {
+      name: 'laravel'
+    }
+  ];
+  render() {
+    return <Tagify tags={this.tags} />
   }
 }
+
+export default App
