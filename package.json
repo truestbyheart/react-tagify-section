@@ -1,0 +1,45 @@
+{
+  "name": "react-tagify-section",
+  "version": "0.0.1",
+  "description": "A react component that help with tag creation and auto suggestion",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truestbyheart/react-tagify-section.git"
+  },
+  "bugs": {
+    "url": "https://github.com/truestbyheart/react-tagify-section/issues"
+  },
+  "homepage": "https://github.com/truestbyheart/react-tagify-section#readme",
+  "keywords": [
+    "react-tagify",
+    "tagify-section"
+  ],
+  "author": "Daniel Charles Mwangila",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "webpack": "^4.39.2"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
+}
