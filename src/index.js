@@ -13,12 +13,17 @@ export default class Tagify extends Component {
   }
   static propTypes = {
     tags: PropTypes.arrayOf(Object).isRequired,
-    getTagList: PropTypes.func.isRequired
+    getTagList: PropTypes.func.isRequired,
+    existingTags: PropTypes.arrayOf(Object)
   };
 
   componentDidMount() {
-    const { tags } = this.props
-    this.appendNewTag(tags)
+    const { tags, existingTags } = this.props
+    if (existingTags) {
+      this.createInitialTags(existingTags)
+    } else {
+      this.appendNewTag(tags)
+    }
   }
 
   escapeRegexCharacters = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -121,7 +126,6 @@ export default class Tagify extends Component {
       if (key.which === 13) {
         const sugBox = document.getElementById('suggestion-box')
         sugBox ? autoSuggestionWrapper.removeChild(sugBox) : ''
-        done.removeAttribute('id')
         done.setAttribute('id', key.target.value.trim())
 
         if (_.indexOf(this.listOfTags, key.target.value, 0) > -1) {
@@ -143,6 +147,47 @@ export default class Tagify extends Component {
     })
   };
 
+  createInitialTags = previousTags => {
+    // Get root div
+    const root = document.getElementById('tagsWrapper')
+    previousTags.map(tag => {
+      this.listOfTags.push(tag)
+      // deleting tag
+      const deleteIcon = document.createElement('i')
+      this.initialId++
+      deleteIcon.classList.add('fas')
+      deleteIcon.classList.add('fa-times')
+      deleteIcon.setAttribute('id', `delTag-${this.initialId}`)
+      deleteIcon.onclick = event => {
+        const delTag = document.getElementById(event.target.id)
+        this.listOfTags.splice(
+          _.indexOf(this.listOfTags, delTag.previousSibling.id, 0),
+          1
+        )
+        const elem = document.getElementById(delTag.parentNode.id)
+        elem.parentNode.removeChild(elem)
+      }
+      // existng tag Wrapper
+      const autoSuggestionWrapper = document.createElement('div')
+      autoSuggestionWrapper.setAttribute('id', `sug-${this.initialId}`)
+      autoSuggestionWrapper.classList.add('tags__autosuggest')
+      this.initialId++
+
+      // create input wrapper
+      const tagElement = document.createElement('input')
+      tagElement.classList.add('tags__inputs')
+      tagElement.setAttribute('id', 'inputWrapper')
+      root.appendChild(autoSuggestionWrapper)
+      autoSuggestionWrapper.appendChild(tagElement)
+      autoSuggestionWrapper.appendChild(deleteIcon)
+
+      tagElement.value = tag.name
+      tagElement.classList.add('tags__inputs--disabled')
+      tagElement.disabled = true
+      tagElement.setAttribute('id', tag.name.trim())
+    })
+    this.appendNewTag()
+  };
   render() {
     return <div className='tags' id='tagsWrapper' />
   }

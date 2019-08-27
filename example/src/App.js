@@ -72,18 +72,33 @@ class App extends Component {
     }
   ];
 
+  previousTags = [
+    {
+      id: 1,
+      name: 'clojure'
+    },
+    {
+      id: 2,
+      name: 'java'
+    },
+    {
+      id: 3,
+      name: 'ruby'
+    }
+  ];
   listofTags = value => {
     this.setState({ tags: value });
-    console.log(this.state);
   };
   render() {
-    console.log(this.state);
-
     return (
       <div className='container'>
         <div className='form-group'>
-          <label htmlFor='tags'>Tags</label>
-          <Tagify tags={this.tags} getTagList={this.listofTags} />
+          <label htmlFor='tags-with-data'>Tags</label>
+          <Tagify
+            tags={this.tags}
+            getTagList={this.listofTags}
+            existingTags={this.previousTags}
+          />
         </div>
       </div>
     );
